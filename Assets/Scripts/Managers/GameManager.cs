@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
     private Board m_gameBoard;
     private Spawner m_spawner;
+    private Shape m_aciveShape;
+
+    private float m_timeToDrop;
+    private float m_dropInterval = 0.25f;
     
     void Start()
     {
@@ -16,7 +20,12 @@ public class GameManager : MonoBehaviour
         m_spawner = GameObject.FindObjectOfType<Spawner>();
 
         if (m_spawner)
-        {                                //Vector3Int.RoundToInt(m_spawner.transform.position);
+        {
+            if (m_aciveShape == null)
+            {
+                m_aciveShape = m_spawner.SpawnShape();
+            }
+            //Vector3Int.RoundToInt(m_spawner.transform.position);
             m_spawner.transform.position = Vectorf.Round(m_spawner.transform.position);
         }
 
@@ -33,6 +42,18 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (!m_gameBoard || !m_spawner)
+        {
+            return;
+        }
+
+        if (Time.time > m_timeToDrop)
+        {
+            m_timeToDrop =  Time.time + m_dropInterval;
+            if (m_aciveShape)
+            {
+                m_aciveShape.MoveDown();
+            }
+        }
     }
 }
