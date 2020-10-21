@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
                 if (!m_gameBoard.IsValidPosition(m_aciveShape))
                 {
                     m_aciveShape.MoveUp();
+                    m_gameBoard.StoreShapeInGrid(m_aciveShape);
                     
                     if (m_spawner)
                     {
