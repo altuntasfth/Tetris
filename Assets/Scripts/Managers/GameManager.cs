@@ -10,9 +10,16 @@ public class GameManager : MonoBehaviour
 
     private float m_timeToDrop;
     private float m_dropInterval = 0.25f;
+
+    private float m_timeToNextKey;
+    
+    [Range(0.02f, 1.0f)]
+    public float m_keyRepeatRate = 0.25f;
     
     void Start()
     {
+        m_timeToNextKey = Time.time;
+        
         //m_gameBoard = GameObject.FindWithTag("Board").GetComponent<Board>();
         //m_spawner = GameObject.FindWithTag("Spawner").GetComponent<Spawner>();
 
@@ -45,6 +52,23 @@ public class GameManager : MonoBehaviour
         if (!m_gameBoard || !m_spawner)
         {
             return;
+        }
+
+        if (Input.GetButton("MoveRight") && (Time.time > m_timeToNextKey) || Input.GetButtonDown("MoveRight"))
+        {
+            m_aciveShape.MoveRight();
+            m_timeToNextKey = Time.time + m_keyRepeatRate;
+            
+            if (m_gameBoard.IsValidPosition(m_aciveShape))
+            {
+                Debug.Log("Move Right");
+            }
+            else
+            {
+                m_aciveShape.MoveLeft();
+                Debug.Log("Hit the right boundary");
+            }
+            
         }
 
         if (Time.time > m_timeToDrop)
