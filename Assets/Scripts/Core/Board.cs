@@ -24,7 +24,6 @@ public class Board : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     bool IsWithinBoard(int x, int y)
@@ -42,7 +41,7 @@ public class Board : MonoBehaviour
         foreach (Transform child in shape.transform)
         {
             Vector2 pos = Vectorf.Round(child.position);
-            
+
             if (!IsWithinBoard((int) pos.x, (int) pos.y))
             {
                 return false;
@@ -60,16 +59,16 @@ public class Board : MonoBehaviour
     void DrawEmptyCells()
     {
         if (m_emptySprite != null)
-        {  
+        {
             for (int y = 0; y < m_height - m_header; y++)
             {
                 for (int x = 0; x < m_width; x++)
                 {
                     Transform clone;
-                    clone = Instantiate(m_emptySprite, new Vector3(x,y,0), Quaternion.identity) as Transform;
+                    clone = Instantiate(m_emptySprite, new Vector3(x, y, 0), Quaternion.identity) as Transform;
                     clone.name = "Board Space ( x = " + x.ToString() + " , y = " + y.ToString() + " )";
                     clone.transform.parent = transform;
-                } 
+                }
             }
         }
         else
@@ -89,6 +88,66 @@ public class Board : MonoBehaviour
         {
             Vector2 pos = Vectorf.Round(child.position);
             m_grid[(int) pos.x, (int) pos.y] = child;
+        }
+    }
+
+    bool IsComplete(int y)
+    {
+        for (int x = 0; x < m_width; ++x)
+        {
+            if (m_grid[x, y] == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void ClearRow(int y)
+    {
+        for (int x = 0; x < m_width; ++x)
+        {
+            if (m_grid[x, y] != null)
+            {
+                Destroy(m_grid[x, y].gameObject);
+            }
+
+            m_grid[x, y] = null;
+        }
+    }
+
+    private void ShiftOneRowDown(int y)
+    {
+        for (int x = 0; x < m_width; ++x)
+        {
+            if (m_grid[x, y] != null)
+            {
+                m_grid[x, y - 1] = m_grid[x, y];
+                m_grid[x, y] = null;
+                m_grid[x, y - 1].position += new Vector3(0, -1, 0);
+            }
+        }
+    }
+
+    private void ShiftRowsDown(int startY)
+    {
+        for (int i = startY; i < m_height; ++i)
+        {
+            ShiftOneRowDown(i);
+        }
+    }
+
+    public void ClearAllRows()
+    {
+        for (int y = 0; y < m_height; ++y)
+        {
+            if (IsComplete(y))
+            {
+                ClearRow(y);
+                ShiftRowsDown(y + 1);
+                y--;
+            }
         }
     }
 }

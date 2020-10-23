@@ -125,5 +125,7 @@ public class GameManager : MonoBehaviour
         m_aciveShape.MoveUp();
         m_gameBoard.StoreShapeInGrid(m_aciveShape);
         m_aciveShape = m_spawner.SpawnShape();
+        
+        m_gameBoard.ClearAllRows();
     }
 }
