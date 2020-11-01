@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
     public float m_keyRepeatRateRotate = 0.25f;
     private float m_timeToNextKeyRotate;
 
+    private bool m_gameOver = false;
+
+    public GameObject m_gameOverPanel;
+    
     void Start()
     {
         m_timeToNextKeyLeftRight = Time.time + m_keyRepeatRateLeftRight;
@@ -58,11 +63,16 @@ public class GameManager : MonoBehaviour
             //Vector3Int.RoundToInt(m_spawner.transform.position);
             m_spawner.transform.position = Vectorf.Round(m_spawner.transform.position);
         }
+
+        if (m_gameOverPanel)
+        {
+            m_gameOverPanel.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if (!m_gameBoard || !m_spawner || !m_aciveShape)
+        if (!m_gameBoard || !m_spawner || !m_aciveShape || m_gameOver)
         {
             return;
         }
@@ -111,8 +121,27 @@ public class GameManager : MonoBehaviour
 
             if (!m_gameBoard.IsValidPosition(m_aciveShape))
             {
-                LandShape();
+                if (m_gameBoard.IsOverLimit(m_aciveShape))
+                {
+                    GameOver();
+                }
+                else
+                {
+                    LandShape();
+                }
             }
+        }
+    }
+
+    private void GameOver()
+    {
+        m_aciveShape.MoveUp();
+        m_gameOver = true;
+        Debug.LogWarning(m_aciveShape.name + " is over the limit!");
+
+        if (m_gameOverPanel)
+        {
+            m_gameOverPanel.SetActive(true);
         }
     }
 
@@ -127,5 +156,11 @@ public class GameManager : MonoBehaviour
         m_aciveShape = m_spawner.SpawnShape();
         
         m_gameBoard.ClearAllRows();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Restarted");
     }
 }
