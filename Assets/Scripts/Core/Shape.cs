@@ -46,14 +46,16 @@ public class Shape : MonoBehaviour
             transform.Rotate(new Vector3(0, 0, -90));
         }
     }
-    
-    void Start()
-    {
-        
-    }
 
-    void Update()
+    public void RotateClockWise(bool clockwise)
     {
-        
+        if (clockwise)
+        {
+            RotateRight();
+        }
+        else
+        {
+            RotateLeft();
+        }
     }
 }
