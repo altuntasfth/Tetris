@@ -25,6 +25,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource m_musicSource;
 
     public AudioClip[] m_musicClips;
+    public AudioClip[] m_vocalClips;
+    public AudioClip m_gameOverVocalClip;
+    
     private AudioClip m_randomMusicClip;
 
     private void Start()
@@ -35,7 +38,7 @@ public class SoundManager : MonoBehaviour
         PlayBackgroundMusic(GetRandomClip(m_musicClips));
     }
 
-    private AudioClip GetRandomClip(AudioClip[] clips)
+    public AudioClip GetRandomClip(AudioClip[] clips)
     {
         AudioClip randomClip = clips[Random.Range(0, clips.Length)];
         return randomClip;
