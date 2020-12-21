@@ -742,7 +742,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 633253285}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1142417561}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1257,6 +1257,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706572935}
   m_CullTransparentMesh: 0
+--- !u!1 &818085477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4067197609628162024, guid: 8e20f99393dad2a48902d9e5197a0e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1812541221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &818085481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818085477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63517d81add47c4681a59bf23608c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_iconTrue: {fileID: 21300000, guid: 2e9316e9bb757a6459e8a6b0f01c0845, type: 3}
+  m_iconFalse: {fileID: 21300000, guid: 7218a114bd3d2ec4387cb4d4365469e1, type: 3}
+  m_defaultIconState: 1
 --- !u!1 &825170232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,6 +1637,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 633253285}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1142417561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4067197609628162024, guid: 8e20f99393dad2a48902d9e5197a0e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 633253285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1142417564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142417561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63517d81add47c4681a59bf23608c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_iconTrue: {fileID: 21300000, guid: 86bdbf29a84bffa4fa09c94ddb2ff193, type: 3}
+  m_iconFalse: {fileID: 21300000, guid: 509cac18d699d0e44bbb36b6b662165f, type: 3}
+  m_defaultIconState: 1
 --- !u!1 &1198905088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,6 +2672,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e753dc3dea92f4b1c81255878103653f, type: 3}
   - {fileID: 8300000, guid: 8b9eee15a25ac4457bc8de1db8deed46, type: 3}
   m_gameOverVocalClip: {fileID: 8300000, guid: dde698f7e18ad439d93644afcb0de99b, type: 3}
+  m_musicIconToggle: {fileID: 1142417564}
+  m_fxIconToggle: {fileID: 818085481}
 --- !u!1 &1770765791
 GameObject:
   m_ObjectHideFlags: 0
