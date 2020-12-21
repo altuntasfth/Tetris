@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     private bool m_gameOver = false;
 
     public GameObject m_gameOverPanel;
+    public GameObject m_pausePanel;
+
+    public bool m_isPaused = false;
 
     public IconToggle m_rotIconTogle;
     private bool m_clockwise = true;
@@ -77,6 +80,11 @@ public class GameManager : MonoBehaviour
         if (m_gameOverPanel)
         {
             m_gameOverPanel.SetActive(false);
+        }
+
+        if (m_pausePanel)
+        {
+            m_pausePanel.SetActive(false);
         }
     }
 
@@ -202,6 +210,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Debug.Log("Restarted");
     }
@@ -221,6 +230,28 @@ public class GameManager : MonoBehaviour
         if (m_rotIconTogle)
         {
             m_rotIconTogle.ToggleIcon(m_clockwise);
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (m_gameOver)
+        {
+            return;
+        }
+
+        m_isPaused = !m_isPaused;
+
+        if (m_pausePanel)
+        {
+            m_pausePanel.SetActive(m_isPaused);
+
+            if (m_soundManager)
+            {
+                m_soundManager.m_musicSource.volume = (m_isPaused) ? m_soundManager.m_musicVolume * 0.25f : m_soundManager.m_musicVolume;
+            }
+
+            Time.timeScale = (m_isPaused) ? 0 : 1;
         }
     }
 }
