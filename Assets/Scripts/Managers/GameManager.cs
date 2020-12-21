@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private Spawner m_spawner;
     private Shape m_aciveShape;
     private SoundManager m_soundManager;
+    private ScoreManager m_scoreManager;
 
     private float m_timeToDrop;
     public float m_dropInterval = 0.9f;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         m_gameBoard = GameObject.FindObjectOfType<Board>();
         m_spawner = GameObject.FindObjectOfType<Spawner>();
         m_soundManager = FindObjectOfType<SoundManager>();
+        m_scoreManager = FindObjectOfType<ScoreManager>();
 
         if (!m_gameBoard)
         {
@@ -60,6 +62,11 @@ public class GameManager : MonoBehaviour
         if (!m_soundManager)
         {
             Debug.LogWarning("WARNING: There is no sound manager defined!");
+        }
+        
+        if (!m_scoreManager)
+        {
+            Debug.LogWarning("WARNING: There is no score manager defined!");
         }
 
         if (!m_spawner)
@@ -90,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!m_gameBoard || !m_spawner || !m_aciveShape || m_gameOver || !m_soundManager)
+        if (!m_gameBoard || !m_spawner || !m_aciveShape || m_gameOver || !m_soundManager || !m_scoreManager)
         {
             return;
         }
@@ -139,7 +146,7 @@ public class GameManager : MonoBehaviour
             if (!m_gameBoard.IsValidPosition(m_aciveShape))
             {
                 //m_aciveShape.RotateLeft();
-                m_aciveShape.RotateClockWise(m_clockwise);
+                m_aciveShape.RotateClockWise(!m_clockwise);
                 PlaySound(m_soundManager.m_errorSound, 0.5f);
             }
             else
@@ -199,10 +206,12 @@ public class GameManager : MonoBehaviour
 
         if (m_gameBoard.m_completedRows > 0)
         {
+            m_scoreManager.ScoreLines(m_gameBoard.m_completedRows);
+            
             if (m_gameBoard.m_completedRows > 1)
             {
                 AudioClip randomClip = m_soundManager.GetRandomClip(m_soundManager.m_vocalClips);
-                PlaySound(randomClip);
+                PlaySound(randomClip, 0.5f);
             }
             PlaySound(m_soundManager.m_clearRowSound);
         }
