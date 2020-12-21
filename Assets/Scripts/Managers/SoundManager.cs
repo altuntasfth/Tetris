@@ -20,11 +20,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip m_dropSound;
     public AudioClip m_gameOverSound;
     //public AudioClip m_backgroundSound;
+    
+    public AudioSource m_musicSource;
 
     public AudioClip[] m_musicClips;
     private AudioClip m_randomMusicClip;
-
-    public AudioSource m_musicSource;
 
     private void Start()
     {
@@ -73,5 +73,10 @@ public class SoundManager : MonoBehaviour
     {
         m_musicEnabled = !m_musicEnabled;
         UpdateMusic();
+    }
+
+    public void ToggleFX()
+    {
+        m_fxEnabled = !m_fxEnabled;
     }
 }

@@ -511,6 +511,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377769520}
   m_CullTransparentMesh: 0
+--- !u!1 &381298282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4067197608682965253, guid: 8e20f99393dad2a48902d9e5197a0e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1812541221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &381298283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381298282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1739423739}
+        m_MethodName: ToggleFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &409997621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2552,13 +2612,16 @@ MonoBehaviour:
   m_musicEnabled: 1
   m_fxEnabled: 1
   m_musicVolume: 0.1
-  m_fxVolume: 1
-  m_clearRowSound: {fileID: 0}
-  m_moveSound: {fileID: 0}
-  m_dropSound: {fileID: 0}
-  m_gameOverSound: {fileID: 0}
-  m_backgroundSound: {fileID: 8300000, guid: 8e6afcfcba29249349c399c7826ebf58, type: 3}
+  m_fxVolume: 0.5
+  m_clearRowSound: {fileID: 8300000, guid: 5e573cc7e2cd44522a9dbd65bd61eb95, type: 3}
+  m_moveSound: {fileID: 8300000, guid: 232745a37421848f0b6ba281e2775fd1, type: 3}
+  m_dropSound: {fileID: 8300000, guid: 2912ce0f9e2544ed7947ea6ba42a1347, type: 3}
+  m_gameOverSound: {fileID: 8300000, guid: fed0a0232ce1b40a882a18aa3a249a22, type: 3}
   m_musicSource: {fileID: 374011856}
+  m_musicClips:
+  - {fileID: 8300000, guid: 8e6afcfcba29249349c399c7826ebf58, type: 3}
+  - {fileID: 8300000, guid: 771c70196026e41e3abd6f9f46b17225, type: 3}
+  - {fileID: 8300000, guid: e227747a923da450c93c73bcd1a0965c, type: 3}
 --- !u!1 &1770765791
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private Board m_gameBoard;
     private Spawner m_spawner;
     private Shape m_aciveShape;
+    private SoundManager m_soundManager;
 
     private float m_timeToDrop;
     private float m_dropInterval = 0.9f;
@@ -43,10 +44,16 @@ public class GameManager : MonoBehaviour
 
         m_gameBoard = GameObject.FindObjectOfType<Board>();
         m_spawner = GameObject.FindObjectOfType<Spawner>();
+        m_soundManager = FindObjectOfType<SoundManager>();
 
         if (!m_gameBoard)
         {
             Debug.LogWarning("WARNING: There is no game board defined!");
+        }
+        
+        if (!m_soundManager)
+        {
+            Debug.LogWarning("WARNING: There is no sound manager defined!");
         }
 
         if (!m_spawner)
@@ -72,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!m_gameBoard || !m_spawner || !m_aciveShape || m_gameOver)
+        if (!m_gameBoard || !m_spawner || !m_aciveShape || m_gameOver || !m_soundManager)
         {
             return;
         }
@@ -156,6 +163,11 @@ public class GameManager : MonoBehaviour
         m_aciveShape = m_spawner.SpawnShape();
         
         m_gameBoard.ClearAllRows();
+
+        if (m_soundManager.m_fxEnabled && m_soundManager.m_dropSound)
+        {
+            AudioSource.PlayClipAtPoint(m_soundManager.m_dropSound, Camera.main.transform.position, m_soundManager.m_fxVolume);
+        }
     }
 
     public void Restart()
