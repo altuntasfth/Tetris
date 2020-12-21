@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private SoundManager m_soundManager;
 
     private float m_timeToDrop;
-    private float m_dropInterval = 0.9f;
+    public float m_dropInterval = 0.9f;
 /*
     [Range(0.02f, 1.0f)] 
     public float m_keyRepeatRate = 0.25f;
