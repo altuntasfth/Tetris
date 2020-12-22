@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private Shape m_aciveShape;
     private SoundManager m_soundManager;
     private ScoreManager m_scoreManager;
+    private Ghost m_ghost;
 
     private float m_timeToDrop;
     public float m_dropInterval = 0.9f;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         m_spawner = GameObject.FindObjectOfType<Spawner>();
         m_soundManager = FindObjectOfType<SoundManager>();
         m_scoreManager = FindObjectOfType<ScoreManager>();
+        m_ghost = FindObjectOfType<Ghost>();
 
         if (!m_gameBoard)
         {
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
         if (!m_scoreManager)
         {
             Debug.LogWarning("WARNING: There is no score manager defined!");
+        }
+        
+        if (!m_ghost)
+        {
+            Debug.LogWarning("WARNING: There is no ghost defined!");
         }
 
         if (!m_spawner)
@@ -108,6 +115,14 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerInput();
+    }
+
+    private void LateUpdate()
+    {
+        if (m_ghost)
+        {
+            m_ghost.DrawGhost(m_aciveShape, m_gameBoard);
+        }
     }
 
     private void PlayerInput()
@@ -203,6 +218,12 @@ public class GameManager : MonoBehaviour
         
         m_aciveShape.MoveUp();
         m_gameBoard.StoreShapeInGrid(m_aciveShape);
+
+        if (m_ghost)
+        {
+            m_ghost.Reset();
+        }
+        
         m_aciveShape = m_spawner.SpawnShape();
         
         m_gameBoard.ClearAllRows();
