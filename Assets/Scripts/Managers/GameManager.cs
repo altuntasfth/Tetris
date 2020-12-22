@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private float m_timeToDrop;
     public float m_dropInterval = 0.9f;
+
+    private float m_dropIntervalModded;
 /*
     [Range(0.02f, 1.0f)] 
     public float m_keyRepeatRate = 0.25f;
@@ -93,6 +96,8 @@ public class GameManager : MonoBehaviour
         {
             m_pausePanel.SetActive(false);
         }
+
+        m_dropIntervalModded = m_dropInterval;
     }
 
     void Update()
@@ -107,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerInput()
     {
-        if (Input.GetButton("MoveRight") && (Time.time > m_timeToNextKeyLeftRight) || Input.GetButtonDown("MoveRight"))
+        if ((Input.GetButton("MoveRight") && (Time.time > m_timeToNextKeyLeftRight)) || Input.GetButtonDown("MoveRight"))
         {
             m_aciveShape.MoveRight();
             m_timeToNextKeyLeftRight = Time.time + m_keyRepeatRateLeftRight;
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour
                 PlaySound(m_soundManager.m_moveSound, 0.5f);
             }
         }
-        else if (Input.GetButton("MoveLeft") && (Time.time > m_timeToNextKeyLeftRight) || Input.GetButtonDown("MoveLeft"))
+        else if ((Input.GetButton("MoveLeft") && (Time.time > m_timeToNextKeyLeftRight)) || Input.GetButtonDown("MoveLeft"))
         {
             m_aciveShape.MoveLeft();
             m_timeToNextKeyLeftRight = Time.time + m_keyRepeatRateLeftRight;
@@ -154,9 +159,9 @@ public class GameManager : MonoBehaviour
                 PlaySound(m_soundManager.m_moveSound, 0.5f);
             }
         }
-        else if (Input.GetButton("MoveDown") && (Time.time > m_timeToNextKeyDown) || (Time.time > m_timeToDrop))
+        else if ((Input.GetButton("MoveDown") && (Time.time > m_timeToNextKeyDown)) || (Time.time > m_timeToDrop))
         {
-            m_timeToDrop = Time.time + m_dropInterval;
+            m_timeToDrop = Time.time + m_dropIntervalModded;
             m_timeToNextKeyDown = Time.time + m_keyRepeatRateDown;
 
             m_aciveShape.MoveDown();
@@ -207,12 +212,22 @@ public class GameManager : MonoBehaviour
         if (m_gameBoard.m_completedRows > 0)
         {
             m_scoreManager.ScoreLines(m_gameBoard.m_completedRows);
-            
-            if (m_gameBoard.m_completedRows > 1)
+
+            if (m_scoreManager.m_didLevelUp)
             {
-                AudioClip randomClip = m_soundManager.GetRandomClip(m_soundManager.m_vocalClips);
-                PlaySound(randomClip, 0.5f);
+                PlaySound(m_soundManager.m_levelUpVocalClip, 0.5f);
+
+                m_dropIntervalModded = Mathf.Clamp(m_dropInterval - ((m_scoreManager.m_level - 1 ) * 0.05f), 0.05f, 1f);
             }
+            else
+            {
+                if (m_gameBoard.m_completedRows > 1)
+                {
+                    AudioClip randomClip = m_soundManager.GetRandomClip(m_soundManager.m_vocalClips);
+                    PlaySound(randomClip, 0.5f);
+                }
+            }
+
             PlaySound(m_soundManager.m_clearRowSound);
         }
     }
