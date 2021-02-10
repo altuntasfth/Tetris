@@ -6,6 +6,8 @@ public class Shape : MonoBehaviour
 {
     public bool m_isRotate = true;
 
+    public Vector3 m_queueOffset;
+
     void Move(Vector3 direction)
     {
         transform.position += direction;

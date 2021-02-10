@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960aa4788353a8b448472a056b1a8776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isRotate: 1
+  m_queueOffset: {x: -0.25, y: 0, z: 0}
 --- !u!1 &3308476111340616917
 GameObject:
   m_ObjectHideFlags: 0
