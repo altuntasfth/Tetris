@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private SoundManager m_soundManager;
     private ScoreManager m_scoreManager;
     private Ghost m_ghost;
+    private Holder m_holder;
 
     private float m_timeToDrop;
     public float m_dropInterval = 0.9f;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
         m_soundManager = FindObjectOfType<SoundManager>();
         m_scoreManager = FindObjectOfType<ScoreManager>();
         m_ghost = FindObjectOfType<Ghost>();
+        m_holder = FindObjectOfType<Holder>();
 
         if (!m_gameBoard)
         {
@@ -297,6 +299,25 @@ public class GameManager : MonoBehaviour
             }
 
             Time.timeScale = (m_isPaused) ? 0 : 1;
+        }
+    }
+
+    public void Hold()
+    {
+        if (!m_holder)
+        {
+            return;
+        }
+
+        if (!m_holder.heldShape)
+        {
+            m_holder.Catch(m_aciveShape);
+            m_aciveShape = m_spawner.SpawnShape();
+        }
+
+        if (m_ghost)
+        {
+            m_ghost.Reset();
         }
     }
 }
