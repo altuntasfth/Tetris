@@ -27,7 +27,7 @@ public class Holder : MonoBehaviour
         {
             shape.transform.position = holderXForm.position + shape.m_queueOffset;
             shape.transform.localScale = Vector3.one * scale;
-            //heldShape = shape;
+            heldShape = shape;
         }
         else
         {
