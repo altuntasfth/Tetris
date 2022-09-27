@@ -3041,6 +3041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holderXForm: {fileID: 814434851}
   heldShape: {fileID: 0}
+  canRelease: 0
 --- !u!114 &1181621698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4703,6 +4704,7 @@ MonoBehaviour:
   m_dropSound: {fileID: 8300000, guid: 2912ce0f9e2544ed7947ea6ba42a1347, type: 3}
   m_errorSound: {fileID: 8300000, guid: 837dfc9d854464e42ac6063e526eacc1, type: 3}
   m_gameOverSound: {fileID: 8300000, guid: fed0a0232ce1b40a882a18aa3a249a22, type: 3}
+  m_holdSound: {fileID: 8300000, guid: 75db4536e7fe84da2b904fa23a23c4d6, type: 3}
   m_musicSource: {fileID: 374011856}
   m_musicClips:
   - {fileID: 8300000, guid: 8e6afcfcba29249349c399c7826ebf58, type: 3}

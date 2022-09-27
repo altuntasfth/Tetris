@@ -195,6 +195,18 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else if (Input.GetButtonDown("ToggleRot"))
+        {
+            ToggleRotDirection();
+        }
+        else if (Input.GetButtonDown("Pause"))
+        {
+            TogglePause();
+        }
+        else if (Input.GetButtonDown("Hold"))
+        {
+            Hold();
+        }
     }
 
     private void GameOver()
@@ -224,6 +236,11 @@ public class GameManager : MonoBehaviour
         if (m_ghost)
         {
             m_ghost.Reset();
+        }
+
+        if (m_holder)
+        {
+            m_holder.canRelease = true;
         }
         
         m_aciveShape = m_spawner.SpawnShape();
@@ -313,6 +330,20 @@ public class GameManager : MonoBehaviour
         {
             m_holder.Catch(m_aciveShape);
             m_aciveShape = m_spawner.SpawnShape();
+            PlaySound(m_soundManager.m_holdSound);
+        }
+        else if (m_holder.canRelease)
+        {
+            Shape temp = m_aciveShape;
+            m_aciveShape = m_holder.Release();
+            m_aciveShape.transform.position = m_spawner.transform.position;
+            m_holder.Catch(temp);
+            PlaySound(m_soundManager.m_holdSound);
+        }
+        else
+        {
+            Debug.LogWarning("HOLDER WARNING: Wait for cool down!");
+            PlaySound(m_soundManager.m_errorSound);
         }
 
         if (m_ghost)

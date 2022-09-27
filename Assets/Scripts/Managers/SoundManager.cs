@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip m_dropSound;
     public AudioClip m_errorSound;
     public AudioClip m_gameOverSound;
+    public AudioClip m_holdSound;
     //public AudioClip m_backgroundSound;
     
     public AudioSource m_musicSource;
