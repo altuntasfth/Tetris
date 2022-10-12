@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fef2ec59665e94c47bb2aef1d0a348a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58de5a8b282d5491499e0187ff90c16c, type: 3}
   m_Color: {r: 1, g: 0.8745099, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fef2ec59665e94c47bb2aef1d0a348a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58de5a8b282d5491499e0187ff90c16c, type: 3}
   m_Color: {r: 1, g: 0.8745099, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isRotate: 0
   m_queueOffset: {x: 0.25, y: 0.25, z: 0}
+  glowSquareTag: LandShapeFx
 --- !u!1 &5446790875076429383
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +292,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fef2ec59665e94c47bb2aef1d0a348a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58de5a8b282d5491499e0187ff90c16c, type: 3}
   m_Color: {r: 1, g: 0.8745099, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -375,7 +376,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fef2ec59665e94c47bb2aef1d0a348a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58de5a8b282d5491499e0187ff90c16c, type: 3}
   m_Color: {r: 1, g: 0.8745099, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
