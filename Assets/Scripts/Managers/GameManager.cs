@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
         
         m_aciveShape = m_spawner.SpawnShape();
         
-        m_gameBoard.ClearAllRows();
+        m_gameBoard.StartCoroutine("ClearAllRows");
 
         PlaySound(m_soundManager.m_dropSound, 0.75f);
 
