@@ -25,6 +25,7 @@ public class Holder : MonoBehaviour
         if (holderXForm)
         {
             shape.transform.position = holderXForm.position + shape.m_queueOffset;
+            shape.transform.rotation = Quaternion.identity;
             shape.transform.localScale = Vector3.one * scale;
             heldShape = shape;
         }
