@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
     public bool m_isPaused = false;
 
     public IconToggle m_rotIconTogle;
+
+    public ParticlePlayer m_gameOverFx;
+    
     private bool m_clockwise = true;
     
     void Start()
@@ -215,13 +218,25 @@ public class GameManager : MonoBehaviour
         m_gameOver = true;
         Debug.LogWarning(m_aciveShape.name + " is over the limit!");
 
+        StartCoroutine(GameOverRoutine());
+        
+        PlaySound(m_soundManager.m_gameOverVocalClip, 5f);
+        PlaySound(m_soundManager.m_gameOverSound, 5f);
+    }
+
+    private IEnumerator GameOverRoutine()
+    {
+        if (m_gameOverFx)
+        {
+            m_gameOverFx.Play();
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        
         if (m_gameOverPanel)
         {
             m_gameOverPanel.SetActive(true);
         }
-        
-        PlaySound(m_soundManager.m_gameOverVocalClip, 5f);
-        PlaySound(m_soundManager.m_gameOverSound, 5f);
     }
 
     private void LandShape()
