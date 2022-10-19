@@ -6,15 +6,24 @@ public class TouchManager : MonoBehaviour
 {
     public delegate void TouchEventHandler(Vector2 swipe);
 
+    public static event TouchEventHandler DragEvent;
     public static event TouchEventHandler SwipeEvent;
-    public static event TouchEventHandler SwipeEndEvent;
+    public static event TouchEventHandler TapEvent;
+    
+    [Range(50,150)]
+    public int m_minDragDistance = 100;
+
+    [Range(20,250)]
+    public int m_minSwipeDistance = 50;
+    
+    private float m_tapTimeMax = 0;
+    public float m_tapTimeWindow = 0.1f;
 
     public Text m_diagnosticText1;
     public Text m_diagnosticText2;
     public bool m_useDiagnostic;
 
     private Vector2 m_touchMovement;
-    private int m_minSwipeDistance = 20;
 
     private void Start()
     {
@@ -30,21 +39,31 @@ public class TouchManager : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 m_touchMovement = Vector2.zero;
+                m_tapTimeMax = Time.time + m_tapTimeWindow;
                 Diagnostic("", "");
             }
             else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
             {
                 m_touchMovement += touch.deltaPosition;
 
-                if (m_touchMovement.magnitude > m_minSwipeDistance)
+                if (m_touchMovement.magnitude > m_minDragDistance)
                 {
-                    OnSwipe();
-                    Diagnostic("Swipe detected", m_touchMovement.ToString() + " " + SwipeDiagnostic(m_touchMovement));
+                    OnDrag();
+                    Diagnostic("Drag detected", m_touchMovement.ToString() + " " + SwipeDiagnostic(m_touchMovement));
                 }
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                OnSwipeEnd();
+                if (m_touchMovement.magnitude > m_minSwipeDistance)
+                {
+                    OnSwipeEnd();
+                    Diagnostic("Swipe detected", m_touchMovement.ToString() + " " + SwipeDiagnostic(m_touchMovement));
+                }
+                else if (Time.time < m_tapTimeMax)
+                {
+                    OnTap();
+                    Diagnostic("Tap detected",m_touchMovement.ToString() + " " + SwipeDiagnostic(m_touchMovement));
+                }
             }
         }
     }
@@ -77,7 +96,15 @@ public class TouchManager : MonoBehaviour
         return direction;
     }
 
-    private void OnSwipe()
+    private void OnDrag()
+    {
+        if (DragEvent != null)
+        {
+            DragEvent(m_touchMovement);
+        }
+    }
+    
+    private void OnSwipeEnd()
     {
         if (SwipeEvent != null)
         {
@@ -85,11 +112,11 @@ public class TouchManager : MonoBehaviour
         }
     }
     
-    private void OnSwipeEnd()
+    private void OnTap()
     {
-        if (SwipeEndEvent != null)
+        if (TapEvent != null)
         {
-            SwipeEndEvent(m_touchMovement);
+            TapEvent(m_touchMovement);
         }
     }
 }

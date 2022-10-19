@@ -6641,7 +6641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_diagnosticText1: {fileID: 1485885862}
   m_diagnosticText2: {fileID: 174025057}
-  m_useDiagnostic: 1
+  m_useDiagnostic: 0
 --- !u!1001 &1418995111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7009,15 +7009,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dropInterval: 0.5
-  m_keyRepeatRateLeftRight: 0.15
-  m_keyRepeatRateDown: 0.01
-  m_keyRepeatRateRotate: 0.25
+  m_keyRepeatRateLeftRight: 0.3
+  m_keyRepeatRateDown: 0.03
+  m_keyRepeatRateRotate: 0.3
   m_gameOverPanel: {fileID: 1594763087}
   m_pausePanel: {fileID: 780268270}
   m_isPaused: 0
   m_rotIconTogle: {fileID: 663217209}
   m_gameOverFx: {fileID: 440759788}
-  diagnosticText: {fileID: 1887059121}
 --- !u!4 &1547250705
 Transform:
   m_ObjectHideFlags: 0
@@ -8857,7 +8856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1887059121
 MonoBehaviour:
   m_ObjectHideFlags: 0
