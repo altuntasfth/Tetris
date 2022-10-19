@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,9 +45,23 @@ public class GameManager : MonoBehaviour
     public IconToggle m_rotIconTogle;
 
     public ParticlePlayer m_gameOverFx;
+
+    public Text diagnosticText;
     
     private bool m_clockwise = true;
-    
+
+    private void OnEnable()
+    {
+        TouchManager.SwipeEvent += SwipeHandler;
+        TouchManager.SwipeEndEvent += SwipeEndHandler;
+    }
+
+    private void OnDisable()
+    {
+        TouchManager.SwipeEvent -= SwipeHandler;
+        TouchManager.SwipeEndEvent -= SwipeEndHandler;
+    }
+
     void Start()
     {
         m_timeToNextKeyLeftRight = Time.time + m_keyRepeatRateLeftRight;
@@ -105,6 +121,11 @@ public class GameManager : MonoBehaviour
         if (m_pausePanel)
         {
             m_pausePanel.SetActive(false);
+        }
+        
+        if (diagnosticText)
+        {
+            diagnosticText.text = "";
         }
 
         m_dropIntervalModded = m_dropInterval;
@@ -367,6 +388,22 @@ public class GameManager : MonoBehaviour
         if (m_ghost)
         {
             m_ghost.Reset();
+        }
+    }
+
+    private void SwipeHandler(Vector2 swipeMovement)
+    {
+        if (diagnosticText)
+        {
+            diagnosticText.text = "SwipeEvent Detected";
+        }
+    }
+    
+    private void SwipeEndHandler(Vector2 swipeMovement)
+    {
+        if (diagnosticText)
+        {
+            diagnosticText.text = "";
         }
     }
 }

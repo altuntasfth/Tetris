@@ -7,6 +7,7 @@ public class TouchManager : MonoBehaviour
     public delegate void TouchEventHandler(Vector2 swipe);
 
     public static event TouchEventHandler SwipeEvent;
+    public static event TouchEventHandler SwipeEndEvent;
 
     public Text m_diagnosticText1;
     public Text m_diagnosticText2;
@@ -40,6 +41,10 @@ public class TouchManager : MonoBehaviour
                     OnSwipe();
                     Diagnostic("Swipe detected", m_touchMovement.ToString() + " " + SwipeDiagnostic(m_touchMovement));
                 }
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                OnSwipeEnd();
             }
         }
     }
@@ -77,6 +82,14 @@ public class TouchManager : MonoBehaviour
         if (SwipeEvent != null)
         {
             SwipeEvent(m_touchMovement);
+        }
+    }
+    
+    private void OnSwipeEnd()
+    {
+        if (SwipeEndEvent != null)
+        {
+            SwipeEndEvent(m_touchMovement);
         }
     }
 }
