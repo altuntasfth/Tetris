@@ -41,6 +41,17 @@ public class GameManager : MonoBehaviour
     public ParticlePlayer m_gameOverFx;
     
     private bool m_clockwise = true;
+    
+    private float m_timeToNextDrag;
+    private float m_timeToNextSwipe;
+    
+    [Range(0.05f,1f)]
+    public float m_minTimeToDrag = 0.15f;
+
+    [Range(0.05f, 1f)]
+    public float m_minTimeToSwipe = 0.3f;
+    
+    private bool m_didTap = false;
 
     enum Direction
     {
@@ -51,19 +62,21 @@ public class GameManager : MonoBehaviour
         Down
     }
 
+    private Direction m_dragDirection = Direction.None;
     private Direction m_swipeDirection = Direction.None;
-    private Direction m_swipeEndDirection = Direction.None;
 
     private void OnEnable()
     {
         TouchManager.DragEvent += DragHandler;
         TouchManager.SwipeEvent += SwipeHandler;
+        TouchManager.TapEvent += TapHandler;
     }
 
     private void OnDisable()
     {
         TouchManager.DragEvent -= DragHandler;
         TouchManager.SwipeEvent -= SwipeHandler;
+        TouchManager.TapEvent -= TapHandler;
     }
 
     void Start()
@@ -166,31 +179,29 @@ public class GameManager : MonoBehaviour
         {
             MoveDown();
         }
-        else if ((m_swipeDirection == Direction.Right && Time.time > m_timeToNextKeyLeftRight) || m_swipeEndDirection == Direction.Right)
+        else if ( (m_swipeDirection == Direction.Right && Time.time > m_timeToNextSwipe) || 
+                  (m_dragDirection == Direction.Right && Time.time > m_timeToNextDrag))
         {
             MoveRight();
-
-            m_swipeDirection = Direction.None;
-            m_swipeEndDirection = Direction.None;
+            m_timeToNextDrag = Time.time + m_minTimeToDrag;
+            m_timeToNextSwipe = Time.time + m_minTimeToSwipe;
         }
-        else if ((m_swipeDirection == Direction.Left && Time.time > m_timeToNextKeyLeftRight) || m_swipeEndDirection == Direction.Left)
+        else if ( (m_swipeDirection == Direction.Left && Time.time > m_timeToNextSwipe) ||
+                  (m_dragDirection == Direction.Left && Time.time > m_timeToNextDrag))
         {
             MoveLeft();
-
-            m_swipeDirection = Direction.None;
-            m_swipeEndDirection = Direction.None;
+            m_timeToNextDrag = Time.time + m_minTimeToDrag;
+            m_timeToNextSwipe = Time.time + m_minTimeToSwipe;
         }
-        else if (m_swipeEndDirection == Direction.Up)
+        else if ((m_swipeDirection == Direction.Up && Time.time > m_timeToNextSwipe) || (m_didTap))
         {
             Rotate();
-
-            m_swipeEndDirection = Direction.None;
+            m_timeToNextSwipe = Time.time + m_minTimeToSwipe;
+            m_didTap = false;
         }
-        else if (m_swipeDirection == Direction.Down && Time.time > m_timeToNextKeyDown)
+        else if (m_dragDirection == Direction.Down && Time.time > m_timeToNextDrag)
         {
             MoveDown();
-
-            m_swipeDirection = Direction.None;
         }
         else if (Input.GetButtonDown("ToggleRot"))
         {
@@ -204,6 +215,10 @@ public class GameManager : MonoBehaviour
         {
             Hold();
         }
+        
+        m_dragDirection = Direction.None;
+        m_swipeDirection = Direction.None;
+        m_didTap = false;
     }
 
     private void MoveDown()
@@ -436,12 +451,17 @@ public class GameManager : MonoBehaviour
 
     private void DragHandler(Vector2 swipeMovement)
     {
-        m_swipeDirection = GetDirection(swipeMovement);
+        m_dragDirection = GetDirection(swipeMovement);
     }
     
     private void SwipeHandler(Vector2 swipeMovement)
     {
-        m_swipeEndDirection = GetDirection(swipeMovement);
+        m_swipeDirection = GetDirection(swipeMovement);
+    }
+    
+    private void TapHandler(Vector2 swipeMovement)
+    {
+        m_didTap = true;
     }
 
     private Direction GetDirection(Vector2 swipeMovement)

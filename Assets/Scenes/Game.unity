@@ -6639,9 +6639,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00022d73b7d5490da41faa1128bf369f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_minDragDistance: 100
+  m_minSwipeDistance: 50
+  m_tapTimeWindow: 0.2
   m_diagnosticText1: {fileID: 1485885862}
   m_diagnosticText2: {fileID: 174025057}
-  m_useDiagnostic: 0
+  m_useDiagnostic: 1
 --- !u!1001 &1418995111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7017,6 +7020,8 @@ MonoBehaviour:
   m_isPaused: 0
   m_rotIconTogle: {fileID: 663217209}
   m_gameOverFx: {fileID: 440759788}
+  m_minTimeToDrag: 0.15
+  m_minTimeToSwipe: 0.3
 --- !u!4 &1547250705
 Transform:
   m_ObjectHideFlags: 0
