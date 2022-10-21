@@ -855,8 +855,6 @@ GameObject:
   - component: {fileID: 174025058}
   - component: {fileID: 174025057}
   - component: {fileID: 174025056}
-  - component: {fileID: 174025055}
-  - component: {fileID: 174025054}
   m_Layer: 5
   m_Name: DiagnosticText2
   m_TagString: Untagged
@@ -884,38 +882,6 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &174025054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174025052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06f1246eefb62847b4b0a4578f9a760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_startAlpha: 1
-  m_targetAlpha: 0
-  m_delay: 2
-  m_timeToFade: 0.3
---- !u!114 &174025055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174025052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06f1246eefb62847b4b0a4578f9a760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_startAlpha: 0
-  m_targetAlpha: 1
-  m_delay: 0.75
-  m_timeToFade: 0.3
 --- !u!225 &174025056
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8403,8 +8369,6 @@ GameObject:
   - component: {fileID: 1485885863}
   - component: {fileID: 1485885862}
   - component: {fileID: 1485885861}
-  - component: {fileID: 1485885860}
-  - component: {fileID: 1485885859}
   m_Layer: 5
   m_Name: DiagnosticText1
   m_TagString: Untagged
@@ -8432,38 +8396,6 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &1485885859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485885857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06f1246eefb62847b4b0a4578f9a760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_startAlpha: 1
-  m_targetAlpha: 0
-  m_delay: 2
-  m_timeToFade: 0.3
---- !u!114 &1485885860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485885857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c06f1246eefb62847b4b0a4578f9a760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_startAlpha: 0
-  m_targetAlpha: 1
-  m_delay: 0.75
-  m_timeToFade: 0.3
 --- !u!225 &1485885861
 CanvasGroup:
   m_ObjectHideFlags: 0
